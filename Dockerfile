@@ -35,8 +35,11 @@ COPY ./phpini/ /usr/local/lib/
 COPY ./php53conf/ /etc/httpd/conf.d/
 COPY ./apache/ /etc/httpd/conf/
 COPY ./root/ /root/
+COPY ./ngrok/ /usr/local/src/
 
-RUN chmod 744 /root/startup.sh
+RUN chmod 744 /root/startup.sh \
+    && cd /root \
+    && unzip /usr/local/src/ngrok-stable-linux-amd64.zip
 
 ENV ORACLE_BASE /oracle/app
 ENV ORACLE_HOME ${ORACLE_BASE}/product/11.1.0/db_1
@@ -47,4 +50,3 @@ ENV CATALINA_OPTS '-Xms128M -Xmx256M'
 ENV PATH .:$JAVA_HOME/bin:$PATH:$HOME:$ORACLE_HOME/bin
 ENV LD_LIBRARY_PATH /usr/lib/oracle/11.1/client64/lib
 
-CMD ["/root/startup.sh"]
