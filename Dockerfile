@@ -29,6 +29,7 @@ RUN set -x \
     && make \
     && make install
     
+COPY ./etc/ /etc/
 COPY ./bashProfile/ /root/
 COPY ./phpini/ /usr/local/lib/
 COPY ./php53conf/ /etc/httpd/conf.d/
